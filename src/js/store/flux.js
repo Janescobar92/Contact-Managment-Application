@@ -22,16 +22,17 @@ const getState = ({ getStore, setStore, getActions }) => {
 						console.log("Error status: ", error);
 					});
 			},
-			setContacts: () => {
-				fetch("https://assets.breatheco.de/apis/fake/contact/agenda/jan_agenda", {
+			setContacts: param => {
+				fetch("https://assets.breatheco.de/apis/fake/contact/", {
 					method: "POST",
-					body: JSON.stringify(MyInputReciver()),
+					body: JSON.stringify(param),
 					headers: {
 						"Content-Type": "application/json"
 					}
 				})
 					.then(response => response.json())
 					.then(answerUpload => {
+						getActions().getContacts();
 						console.log("Success: ", JSON.stringify(answerUpload));
 					});
 			},
@@ -47,12 +48,9 @@ const getState = ({ getStore, setStore, getActions }) => {
 					address: myAddress,
 					phone: myPhone
 				};
-				return newContact;
 				console.log(newContact);
+				return newContact;
 			}
-			// addNewContact: () =>{
-
-			// }
 		}
 	};
 };

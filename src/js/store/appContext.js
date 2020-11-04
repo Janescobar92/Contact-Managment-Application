@@ -22,9 +22,11 @@ const injectContext = PassedComponent => {
 		);
 
 		useEffect(() => {
-			state.actions.getContacts();
-			state.actions.MyInputReciver();
-			state.actions.setContacts();
+			if (state.store.contacts.length == 0) {
+				state.actions.getContacts();
+				console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+			}
+			console.log("entro en use Effect cada segundo");
 			/**
 			 * EDIT THIS!
 			 * This function is the equivalent to "window.onLoad", it only run once on the entire application lifetime
@@ -33,7 +35,7 @@ const injectContext = PassedComponent => {
 			 * state.loadSomeData(); <---- calling this function from the flux.js actions
 			 *
 			 **/
-		}, []);
+		}, [state.store.contacts]);
 
 		// the initial value for the context its not null anymore, but the current state of this component,
 		// the context will have a getStore and setStore functions available then, because they were declared

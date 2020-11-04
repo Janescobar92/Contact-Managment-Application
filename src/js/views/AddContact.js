@@ -42,12 +42,15 @@ export const AddContact = () => {
 						<label>Address</label>
 						<input type="text" className="form-control" placeholder="Enter address" id="address" />
 					</div>
-					<button
-						type="button"
-						className="btn btn-primary form-control"
-						onClick={() => actions.MyInputReciver()}>
-						save
-					</button>
+					<Link className="mt-3 w-100 text-center" to="/">
+						<button
+							type="button"
+							className="btn btn-primary form-control"
+							onClick={() => actions.setContacts(actions.MyInputReciver())}>
+							save
+						</button>
+					</Link>
+
 					<Link className="mt-3 w-100 text-center" to="/">
 						or get back to contacts
 					</Link>
