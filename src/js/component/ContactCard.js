@@ -18,7 +18,12 @@ export const ContactCard = props => {
 						<button className="btn">
 							<i className="fas fa-pencil-alt mr-3" />
 						</button>
-						<button className="btn" onClick={() => props.onDelete()}>
+						<button
+							className="btn"
+							onClick={() => {
+								props.onDelete();
+								store.deleteSelector = contact.id;
+							}}>
 							<i className="fas fa-trash-alt" />
 						</button>
 					</div>

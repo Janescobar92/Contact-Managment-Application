@@ -1,7 +1,8 @@
 const getState = ({ getStore, setStore, getActions }) => {
 	return {
 		store: {
-			contacts: []
+			contacts: [],
+			deleteSelector: null
 		},
 		actions: {
 			getContacts: () => {
@@ -50,6 +51,24 @@ const getState = ({ getStore, setStore, getActions }) => {
 				};
 				console.log(newContact);
 				return newContact;
+			},
+			deleteContact: () => {
+				fetch("https://assets.breatheco.de/apis/fake/contact/" + getStore().deleteSelector, {
+					method: "DELETE"
+				})
+					.then(response => {
+						if (!response.ok) {
+							throw new Error(response.status);
+						}
+						return response.json();
+					})
+					.then(answerUpload => {
+						getActions().getContacts();
+						console.log("Success: Contact deleted");
+					})
+					.catch(error => {
+						console.log("Deleting contact, error status: ", error);
+					});
 			}
 		}
 	};
