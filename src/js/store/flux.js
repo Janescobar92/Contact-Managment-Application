@@ -2,7 +2,9 @@ const getState = ({ getStore, setStore, getActions }) => {
 	return {
 		store: {
 			contacts: [],
-			deleteSelector: null
+			deleteSelector: null,
+			UpdateSelector: null,
+			indexSelector: null
 		},
 		actions: {
 			getContacts: () => {
@@ -26,6 +28,20 @@ const getState = ({ getStore, setStore, getActions }) => {
 			setContacts: param => {
 				fetch("https://assets.breatheco.de/apis/fake/contact/", {
 					method: "POST",
+					body: JSON.stringify(param),
+					headers: {
+						"Content-Type": "application/json"
+					}
+				})
+					.then(response => response.json())
+					.then(answerUpload => {
+						getActions().getContacts();
+						console.log("Success: ", JSON.stringify(answerUpload));
+					});
+			},
+			editContacts: param => {
+				fetch("https://assets.breatheco.de/apis/fake/contact/" + getStore().UpdateSelector, {
+					method: "PUT",
 					body: JSON.stringify(param),
 					headers: {
 						"Content-Type": "application/json"
